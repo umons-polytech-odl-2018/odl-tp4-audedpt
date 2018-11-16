@@ -1,6 +1,9 @@
 package exercise2;
 
-import java.io.IOException;
+import com.sun.corba.se.pept.encoding.InputObject;
+import com.sun.corba.se.pept.encoding.OutputObject;
+
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -8,11 +11,29 @@ import java.time.LocalDate;
 
 public class Exercise2 {
 	public static void save(Classroom classroom, Path filePath) {
-
+	try{
+		OutputStream outputStream = Files.newOutputStream(filePath);
+		ObjectOutput objSave = new ObjectOutputStream(outputStream);
+		objSave.writeObject(classroom);
+	}
+	catch (Exception e){
+		e.printStackTrace();
+	}
 	}
 
 	public static Classroom load(Path filePath) {
-		return null;
+		try{
+			InputStream inputStream = Files.newInputStream(filePath);
+			ObjectInput objRead = new ObjectInputStream(inputStream);
+
+				Classroom classroom = (Classroom) objRead.readObject();
+				System.out.println(classroom);
+				return classroom;
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public static void main(String[] args) throws IOException {

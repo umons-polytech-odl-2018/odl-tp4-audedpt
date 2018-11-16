@@ -1,13 +1,15 @@
 package exercise2;
 
+import java.awt.*;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Classroom {
+public class Classroom implements Serializable {
 	private final Teacher teacher;
 	private final Student[] students;
 
-	public Classroom(Teacher teacher, Student[] students) {
+	public Classroom(Teacher teacher, Student[] students)  {
 		this.teacher = teacher;
 		this.students = students;
 	}
